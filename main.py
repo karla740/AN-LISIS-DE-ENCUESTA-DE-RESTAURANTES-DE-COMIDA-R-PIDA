@@ -15,3 +15,8 @@ resultado = segmentacion_clientes(datos) #Esta funcion retorna un diccionario y 
 print(f"Promotores: {resultado['promotores']}") #Imprimimos los resultados por separado
 print(f"Pasivos: {resultado['pasivos']}")
 print(f"Detractores: {resultado['detractores']}")
+
+#Reporte 12. Comida con mayor satisfacción
+print("\n12. Comida con mayor satisfacción")
+resultado = comida_mayor_satisfaccion(datos)
+print(f"La comida con mayor satisfacción es: {resultado}")
