@@ -84,3 +84,65 @@ def comida_menor_satisfaccion(datos):
             peor_promedio = promedio
             peor_comida = comida
     return peor_comida
+
+
+
+def reporte16(datos):
+    #Calcula la suma de recomendaciones según la percepción del precio.
+    analisis = {}
+    for fila in datos:
+        p = fila["experiencia"]["precio"]
+        r = fila["nps"]["recomendacion"]
+        # Acumula la recomendación por cada categoría de precio
+        analisis[p] = analisis.get(p, 0) + r
+    return {"suma": analisis}
+
+def reporte17(datos):
+    #"""Promedio de satisfacción general según el tiempo de entrega."""
+    tiempos = {}
+    conteos = {}
+    for fila in datos:
+        t = fila["experiencia"]["tiempo de entrega"]
+        s = fila["nps"]["general"]
+        tiempos[t] = tiempos.get(t, 0) + s
+        conteos[t] = conteos.get(t, 0) + 1
+    
+    # Genera el promedio por cada tiempo (Rápido, Normal, Lento)
+    return {t: round(tiempos[t]/conteos[t], 2) for t in tiempos}
+
+def reporte18(datos):
+    #"""Crea un ranking de las comidas más mencionadas."""
+    ranking = {}
+    for fila in datos:
+        comida = fila["preferencias"]["comida_preferida"]
+        ranking[comida] = ranking.get(comida, 0) + 1
+    # Ordena el diccionario de mayor a menor frecuencia
+    return dict(sorted(ranking.items(), key=lambda item: item[1], reverse=True))
+
+def reporte19(datos):
+    #"""Promedio de calificación general por cada tipo de comida rápida."""
+    comidas = {}
+    conteos = {}
+    for fila in datos:
+        c = fila["preferencias"]["comida_preferida"]
+        g = fila["nps"]["general"]
+        comidas[c] = comidas.get(c, 0) + g
+        conteos[c] = conteos.get(c, 0) + 1
+    return {c: round(comidas[c]/conteos[c], 2) for c in comidas}
+
+def reporte20(datos):
+    #"""Define el perfil promedio: gasto y satisfacción de todos los encuestados."""
+    total_gasto = 0
+    total_sat = 0
+    cantidad = len(datos)
+    
+    if cantidad == 0: return "Sin datos"
+    
+    for fila in datos:
+        total_gasto += fila["consumo"]["gasto"]
+        total_sat += fila["nps"]["general"]
+        
+    return {
+        "gasto_medio": round(total_gasto / cantidad, 2),
+        "satisfaccion_media": round(total_sat / cantidad, 2)
+    }
