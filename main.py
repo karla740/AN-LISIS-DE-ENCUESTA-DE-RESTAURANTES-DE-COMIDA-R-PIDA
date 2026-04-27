@@ -11,7 +11,7 @@ print("REPORTES 11-15".center(70,"-"))
 print("="*70)
 #Reporte 11. Segmentación: promotores, pasivos, detractores
 print("\n11. Segmentación: promotores, pasivos, detractores")
-resultado = segmentacion_clientes(datos)
-print(f"Promotores: {resultado['promotores']}") 
+resultado = segmentacion_clientes(datos) #Esta funcion retorna un diccionario y lo almacenamos en una variable
+print(f"Promotores: {resultado['promotores']}") #Imprimimos los resultados por separado
 print(f"Pasivos: {resultado['pasivos']}")
 print(f"Detractores: {resultado['detractores']}")
