@@ -18,5 +18,4 @@ print(f"Detractores: {resultado['detractores']}")
 
 #Reporte 12. Comida con mayor satisfacción
 print("\n12. Comida con mayor satisfacción")
-resultado = comida_mayor_satisfaccion(datos)
-print(f"La comida con mayor satisfacción es: {resultado}")
+print(comida_mayor_satisfaccion(datos))
