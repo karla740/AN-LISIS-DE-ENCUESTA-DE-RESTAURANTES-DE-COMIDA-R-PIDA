@@ -11,11 +11,19 @@ print("REPORTES 11-15".center(70,"-"))
 print("="*70)
 #Reporte 11. Segmentación: promotores, pasivos, detractores
 print("\n11. Segmentación: promotores, pasivos, detractores")
-resultado = segmentacion_clientes(datos) #Esta funcion retorna un diccionario y lo almacenamos en una variable
-print(f"Promotores: {resultado['promotores']}") #Imprimimos los resultados por separado
+
+#Esta funcion retorna un diccionario y lo almacenamos en una variable
+resultado = segmentacion_clientes(datos) 
+
+#Imprimimos los resultados por separado
+print(f"Promotores: {resultado['promotores']}") 
 print(f"Pasivos: {resultado['pasivos']}")
 print(f"Detractores: {resultado['detractores']}")
 
 #Reporte 12. Comida con mayor satisfacción
 print("\n12. Comida con mayor satisfacción")
 print(comida_mayor_satisfaccion(datos))
+
+#Reporte 13. Comida con menor satisfacción
+print("\n13. Comida con menor satisfacción") 
+print(comida_menor_satisfaccion(datos))
