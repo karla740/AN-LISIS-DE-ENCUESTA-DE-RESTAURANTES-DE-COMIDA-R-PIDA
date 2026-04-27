@@ -8,7 +8,7 @@ def cargar_datos(nombre_archivo):
             for fila in lector:
                 registro = {
                     "id": int(fila["id"]),
-                    "prefierencias": {
+                    "preferencias": {
                         "comida_preferida": fila["comida_preferida"],
                         "frecuencia": fila["frecuencia_consumo"],
                     },
