@@ -27,3 +27,13 @@ print(comida_mayor_satisfaccion(datos))
 #Reporte 13. Comida con menor satisfacción
 print("\n13. Comida con menor satisfacción") 
 print(comida_menor_satisfaccion(datos))
+
+# Reporte 14. Relación entre gasto y satisfacción
+print("\n14. Relación entre gasto y satisfacción")
+
+resultado_14 = relacion_gasto_satisfaccion(datos)
+
+for segmento, valores in resultado_14.items():
+    print(f"\nSegmento: {segmento}")
+    print(f"Promedio de satisfacción: {valores['promedio_satisfaccion']}")
+    print(f"Promedio de gasto: {valores['promedio_gasto']}")
