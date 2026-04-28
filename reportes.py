@@ -123,6 +123,142 @@ def promedio_satisfaccion_servicio(datos):
     # Entregamos el promedio final redondeado a dos cifras
     return round(promedio, 2)
 
+# ==============================================================================
+# REPORTES 6 AL 10
+# ==============================================================================
+
+# Reporte 6. Distribución del tiempo de entrega
+def distribucion_tiempo(datos):
+    # Inicializamos un diccionario vacío para contar las respuestas de tiempo
+    conteo_tiempo = {}
+    
+    # Recorremos a cada persona encuestada en nuestra lista
+    for p in datos:
+        # Verificamos que la información de "experiencia" exista para evitar errores
+        if "experiencia" in p:
+            # Extraemos lo que opinó sobre el tiempo de entrega (ej. "Rápido", "Lento")
+            tiempo = p["experiencia"]["tiempo de entrega"]
+            
+            # Si ya tenemos esa respuesta en el diccionario, le sumamos 1
+            if tiempo in conteo_tiempo:
+                conteo_tiempo[tiempo] += 1
+            # Si es una respuesta nueva, la registramos con el valor de 1
+            else:
+                conteo_tiempo[tiempo] = 1
+                
+    # Retornamos el diccionario con el conteo total
+    return conteo_tiempo
+
+
+# Reporte 7. Distribución de percepción de precios
+def distribucion_precios(datos):
+    # Creamos un diccionario vacío para ir guardando cómo perciben los precios
+    conteo_precios = {}
+    
+    # Pasamos por cada registro de la base de datos
+    for p in datos:
+        # Aseguramos que el bloque "experiencia" esté presente
+        if "experiencia" in p:
+            # Sacamos el dato del precio (ej. "Medio", "Caro")
+            precio = p["experiencia"]["precio"]
+            
+            # Si esta percepción ya existe, aumentamos su contador
+            if precio in conteo_precios:
+                conteo_precios[precio] += 1
+            # Si no existe aún, la agregamos empezando en 1
+            else:
+                conteo_precios[precio] = 1
+                
+    # Devolvemos el diccionario ya lleno con los resultados
+    return conteo_precios
+
+
+# Reporte 8. Promedio general de satisfacción
+def promedio_general_satisfaccion(datos):
+    # Variable para ir sumando todas las calificaciones generales
+    suma_general = 0
+    # Calculamos cuántas personas respondieron en total
+    total_personas = len(datos)
+    
+    # Si la lista está vacía, regresamos 0 para no dividir entre cero
+    if total_personas == 0:
+        return 0
+        
+    # Iteramos sobre todos los clientes
+    for p in datos:
+        # Verificamos que la sección "nps" exista en este registro
+        if "nps" in p:
+            # Sumamos la calificación general al total acumulado
+            suma_general += p["nps"]["general"]
+            
+    # Calculamos el promedio matemático
+    promedio = suma_general / total_personas
+    
+    # Retornamos el promedio redondeado a dos decimales
+    return round(promedio, 2)
+
+
+# Reporte 9. Porcentaje de clientes que volverían
+def porcentaje_volverian(datos):
+    # Contador para las personas que dijeron que SÍ volverían
+    si_volverian = 0
+    # Obtenemos el total de personas encuestadas
+    total_personas = len(datos)
+    
+    # Protección para evitar división por cero si no hay datos
+    if total_personas == 0:
+        return "0%"
+        
+    # Recorremos cada persona en los datos
+    for p in datos:
+        # Validamos que exista "nps" y que la respuesta de "volveria" sea True (Verdadera)
+        if "nps" in p and p["nps"]["volveria"]:
+            # Si es True, sumamos 1 a nuestro contador
+            si_volverian += 1
+            
+    # Calculamos el porcentaje: (los que dijeron sí / el total) multiplicado por 100
+    porcentaje = (si_volverian / total_personas) * 100
+    
+    # Retornamos un texto formateado con el símbolo de porcentaje y 2 decimales
+    return f"{round(porcentaje, 2)}%"
+
+
+# Reporte 10. Cálculo del NPS (Net Promoter Score)
+def calculo_nps(datos):
+    # Variables para contar cuántos son promotores y cuántos detractores
+    promotores = 0
+    detractores = 0
+    total_personas = len(datos)
+    
+    # Si no hay registros, el NPS es 0
+    if total_personas == 0:
+        return 0
+        
+    # Recorremos la lista de personas
+    for p in datos:
+        # Validamos que el bloque "nps" exista
+        if "nps" in p:
+            # Extraemos la calificación de recomendación que dio el cliente
+            recomendacion = p["nps"]["recomendacion"]
+            
+            # Si la calificación es 9 o 10, es un promotor
+            if recomendacion >= 9:
+                promotores += 1
+            # Si la calificación es 6 o menos, es un detractor (los de 7 y 8 son pasivos y se ignoran en esta parte)
+            elif recomendacion <= 6:
+                detractores += 1
+                
+    # Calculamos qué porcentaje del total representan los promotores
+    porcentaje_promotores = (promotores / total_personas) * 100
+    # Calculamos qué porcentaje del total representan los detractores
+    porcentaje_detractores = (detractores / total_personas) * 100
+    
+    # La fórmula oficial del NPS es: % Promotores - % Detractores
+    nps = porcentaje_promotores - porcentaje_detractores
+    
+    # Retornamos el resultado redondeado a dos decimales
+    return round(nps, 2)
+
 # Reporte 11. Segmentación: promotores, pasivos, detractores
 def segmentacion_clientes(datos): #Define la función que recibe la lista de encuestados.
     promotores = 0 #Inicializa contadores para cada tipo de cliente.

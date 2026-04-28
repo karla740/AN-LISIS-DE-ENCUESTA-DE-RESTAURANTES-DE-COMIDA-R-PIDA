@@ -58,7 +58,7 @@ def submenu_1_5():
             break
             
         else:
-            print("\n⚠️ Opción inválida. Intenta de nuevo.")
+            print("\nOpción inválida. Intenta de nuevo.")
             pausar()
 
 def submenu_6_10():
@@ -70,35 +70,49 @@ def submenu_6_10():
         print("2. Distribución de percepción de precios")
         print("3. Promedio general de satisfacción")
         print("4. Porcentaje de clientes que volverían")
-        print("5. Cálculo del NPS")
+        print("5. Cálculo del NPS (Net Promoter Score)")
         print("6. Volver al Menú Principal")
         
         opcion = input("\nElige un reporte (1-6): ")
         
         if opcion == '1':
-            print("\n--- 6. Tiempo de entrega ---")
-            print("   (Llamada a tu función)")
+            print("\n--- 6. Distribución del tiempo de entrega ---")
+            tiempos = distribucion_tiempo(datos)
+            for tiempo, cantidad in tiempos.items():
+                print(f"   - {tiempo}: {cantidad} respuestas")
             pausar()
+            
         elif opcion == '2':
-            print("\n--- 7. Percepción de precios ---")
-            print("   (Llamada a tu función)")
+            print("\n--- 7. Distribución de percepción de precios ---")
+            precios = distribucion_precios(datos)
+            for precio, cantidad in precios.items():
+                print(f"   - {precio}: {cantidad} respuestas")
             pausar()
+            
         elif opcion == '3':
             print("\n--- 8. Promedio general de satisfacción ---")
-            print("   (Llamada a tu función)")
+            resultado = promedio_general_satisfaccion(datos)
+            print(f"   Calificación promedio: {resultado} / 10 pts")
             pausar()
+            
         elif opcion == '4':
-            print("\n--- 9. Clientes que volverían ---")
-            print("   (Llamada a tu función)")
+            print("\n--- 9. Porcentaje de clientes que volverían ---")
+            resultado = porcentaje_volverian(datos)
+            print(f"   Índice de retorno: {resultado}")
             pausar()
+            
         elif opcion == '5':
-            print("\n--- 10. Cálculo del NPS ---")
-            print("   (Llamada a tu función)")
+            print("\n--- 10. Cálculo del NPS (Net Promoter Score) ---")
+            resultado = calculo_nps(datos)
+            print(f"   Puntaje NPS: {resultado}")
+            print("   (Fórmula: %Promotores - %Detractores)")
             pausar()
+            
         elif opcion == '6':
             break
+            
         else:
-            print("\n⚠️ Opción inválida. Intenta de nuevo.")
+            print("\nOpción inválida. Intenta de nuevo.")
             pausar()
 
 def submenu_11_15():
@@ -146,7 +160,7 @@ def submenu_11_15():
         elif opcion == '6':
             break
         else:
-            print("\n⚠️ Opción inválida. Intenta de nuevo.")
+            print("\nOpción inválida. Intenta de nuevo.")
             pausar()
 
 def submenu_16_20():
@@ -201,7 +215,7 @@ def submenu_16_20():
         elif opcion == '6':
             break
         else:
-            print("\n⚠️ Opción inválida. Intenta de nuevo.")
+            print("\nOpción inválida. Intenta de nuevo.")
             pausar()
 
 # ==============================================================================
@@ -234,7 +248,7 @@ def menu_principal():
             print("\nSaliendo del sistema... ¡Buen trabajo equipo!\n")
             break
         else:
-            print("\n⚠️ Opción inválida. Por favor, ingrese un número del 1 al 5.")
+            print("\nOpción inválida. Por favor, ingrese un número del 1 al 5.")
             pausar()
 
 # ==============================================================================
