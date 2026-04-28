@@ -149,12 +149,21 @@ def submenu_11_15():
             
         elif opcion == '4':
             print("\n--- 14. Relación Gasto vs Satisfacción ---")
-            print("   (Llamada a tu función)")
+            resultado_14 = relacion_gasto_satisfaccion(datos)
+
+            for segmento, valores in resultado_14.items():
+                print(f"\nSegmento: {segmento}")
+                print(f"Promedio de satisfacción: {valores['promedio_satisfaccion']}")
+                print(f"Promedio de gasto: {valores['promedio_gasto']}")
             pausar()
             
         elif opcion == '5':
             print("\n--- 15. Frecuencia vs Satisfacción ---")
-            print("   (Llamada a tu función)")
+            resultado_15 = frecuencia_satisfaccion(datos)
+
+            for frecuencia, promedio in resultado_15.items():
+                print(f"\nFrecuencia: {frecuencia}")
+                print(f"Promedio de satisfacción: {promedio}")
             pausar()
             
         elif opcion == '6':
@@ -228,10 +237,10 @@ def menu_principal():
         print(" SISTEMA DE ANÁLISIS DE RESTAURANTES ".center(50, "="))
         print("="*50)
         print(f"Registros cargados: {len(datos)}\n")
-        print("1. Reportes 1 al 5   (Integrante 1)")
-        print("2. Reportes 6 al 10  (Integrante 2)")
-        print("3. Reportes 11 al 15 (Integrante 3)")
-        print("4. Reportes 16 al 20 (Integrante 4)")
+        print("1. Reportes 1 al 5   (Jonathan Vladimir Montes)")
+        print("2. Reportes 6 al 10  (Karla Hidalgo)")
+        print("3. Reportes 11 al 15 (Beatriz Eunice Beltran)")
+        print("4. Reportes 16 al 20 (Nicole Amaya)")
         print("5. Salir del sistema")
         
         opcion = input("\nSeleccione el bloque de reportes (1-5): ")
