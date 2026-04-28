@@ -346,6 +346,93 @@ def comida_menor_satisfaccion(datos):
             peor_comida = comida
     return peor_comida
 
+# Reporte 14. Relación entre gasto y satisfacción
+def relacion_gasto_satisfaccion(datos):
+    
+    # Diccionario para agrupar por rangos de gasto
+    segmentos = {
+        "bajo": [0, 0, 0],      # suma_satisfaccion, cantidad, gasto_total
+        "medio": [0, 0, 0],
+        "alto": [0, 0, 0]
+    }
+
+    for p in datos:
+        
+        # Obtener datos
+        gasto = p["consumo"]["gasto"]
+        producto = p["experiencia"]["producto"]
+        servicio = p["experiencia"]["servicio"]
+        
+        # Promedio de satisfacción
+        satisfaccion = (producto + servicio) / 2
+        
+        # Clasificación por gasto
+        if gasto < 50:
+            segmento = "bajo"
+        elif gasto <= 100:
+            segmento = "medio"
+        else:
+            segmento = "alto"
+        
+        # Acumular datos
+        segmentos[segmento][0] += satisfaccion
+        segmentos[segmento][1] += 1
+        segmentos[segmento][2] += gasto
+
+    # Calcular promedios finales
+    resultado = {}
+
+    for key, valores in segmentos.items():
+        suma_sat = valores[0]
+        cantidad = valores[1]
+        suma_gasto = valores[2]
+
+        if cantidad > 0:
+            resultado[key] = {
+                "promedio_satisfaccion": round((suma_sat / cantidad),2),
+                "promedio_gasto": round((suma_gasto / cantidad), 2)
+            }
+        else:
+            resultado[key] = {
+                "promedio_satisfaccion": 0,
+                "promedio_gasto": 0
+            }
+
+    return resultado
+
+# Reporte 15. Frecuencia vs satisfacción
+def frecuencia_satisfaccion(datos):
+
+    # Diccionario para agrupar por frecuencia
+    segmentos = {}
+
+    for p in datos:
+
+        frecuencia = p["preferencias"]["frecuencia"]
+        producto = p["experiencia"]["producto"]
+        servicio = p["experiencia"]["servicio"]
+
+        # promedio de satisfacción por persona
+        satisfaccion = (producto + servicio) / 2
+
+        # si no existe la frecuencia, se crea
+        if frecuencia not in segmentos:
+            segmentos[frecuencia] = [0, 0]  # suma_satisfaccion, cantidad
+
+        # acumulación de datos
+        segmentos[frecuencia][0] += satisfaccion
+        segmentos[frecuencia][1] += 1
+
+    # calcular promedios finales
+    resultado = {}
+
+    for frecuencia, valores in segmentos.items():
+        suma = valores[0]
+        cantidad = valores[1]
+
+        resultado[frecuencia] = suma / cantidad
+
+    return resultado
 
 
 def reporte16(datos):
