@@ -159,7 +159,11 @@ def submenu_11_15():
             
         elif opcion == '5':
             print("\n--- 15. Frecuencia vs Satisfacción ---")
-            print("   (Llamada a tu función)")
+            resultado_15 = frecuencia_satisfaccion(datos)
+
+            for frecuencia, promedio in resultado_15.items():
+                print(f"\nFrecuencia: {frecuencia}")
+                print(f"Promedio de satisfacción: {promedio}")
             pausar()
             
         elif opcion == '6':
